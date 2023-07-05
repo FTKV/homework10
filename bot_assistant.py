@@ -4,7 +4,7 @@ from collections import UserDict
 class AddressBook(UserDict):
     def add_record(self, record):
         self.data[record.name.value] = record
-        return "Add record succes"
+        return "Add record success"
 
 
 class Record:
@@ -19,7 +19,7 @@ class Record:
             if item == phone:
                 return "The phone is exist"
         self.phones.append(phone)
-        return "Add phone succes"
+        return "Add phone success"
 
     def change_phone(self, old_phone, new_phone):
         if old_phone == new_phone:
@@ -30,7 +30,7 @@ class Record:
         for i, item in enumerate(self.phones):
             if item == old_phone:
                 self.phones[i] = new_phone
-                return "Change succes"
+                return "Change success"
         return "The phone is not found"
 
     def remove_phone(self, phone):
