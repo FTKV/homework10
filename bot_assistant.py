@@ -22,6 +22,8 @@ class Record:
         return "Add phone succes"
 
     def change_phone(self, old_phone, new_phone):
+        if old_phone == new_phone:
+            return "Old and new phones should be different"
         for item in self.phones:
             if item == new_phone:
                 return "The new phone is already exist"
@@ -64,11 +66,9 @@ def input_error(func):
             if not args[1].isalpha():
                 raise KeyError
             if func.__name__ != "phone":
-                if not args[2].isdecimal():
-                    raise ValueError
-            if func.__name__ == "change":
-                if not args[3].isdecimal():
-                    raise ValueError
+                for i in range(2, len(args)):
+                    if not args[i].isdecimal():
+                        raise ValueError
             return func(*args)
         except KeyError:
             return "Enter user name correctly"
@@ -84,7 +84,7 @@ def add(*args):
     for key in address_book.data.keys():
         if key.casefold() == args[1].casefold():
             return "The contact is exist"
-    return address_book.add_record(Record(Name(args[1].title()), Phone(args[2])))
+    return address_book.add_record(Record(Name(args[1].title()), *map(Phone, args[2:])))
 
 
 @input_error
